@@ -8,13 +8,6 @@ jobs:
   search_flights:
     name: Flieght_Searcher
     runs-on: ubuntu-latest
-    env:
-      TWILIO_AUTH_TOKEN: ${{ vars.TWILIO_AUTH_TOKEN }}
-      TWILIO_SID: ${{ vars.TWILIO_SID }}
-      TWILIO_VERIFIED_NUMBER: ${{ vars.TWILIO_VIRTUAL_NUMBER }}
-      TWILIO_VIRTUAL_NUMBER: ${{ vars.TWILIO_VIRTUAL_NUMBER }}
-      SHEETY_PRICES_ENDPOINT: ${{ vars.SHEETY_PRICES_ENDPOINT }}
-      API_KEY: ${{ vars.API_KEY }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -25,4 +18,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Run python
+        env:
+          TWILIO_AUTH_TOKEN: ${{ vars.TWILIO_AUTH_TOKEN }}
+          TWILIO_SID: ${{ vars.TWILIO_SID }}
+          TWILIO_VERIFIED_NUMBER: ${{ vars.TWILIO_VIRTUAL_NUMBER }}
+          TWILIO_VIRTUAL_NUMBER: ${{ vars.TWILIO_VIRTUAL_NUMBER }}
+          SHEETY_PRICES_ENDPOINT: ${{ vars.SHEETY_PRICES_ENDPOINT }}
+          API_KEY: ${{ vars.API_KEY }}
         run: python3 main.py
