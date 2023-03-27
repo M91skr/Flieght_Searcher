@@ -1,0 +1,28 @@
+name: Run scheduled action
+on:
+  schedule:
+    # You need to set your schedule here
+    - cron: "*/5 * * * *"
+
+jobs:
+  search_flights:
+    name: Flieght_Searcher
+    runs-on: ubuntu-latest
+    env:
+      TWILIO_AUTH_TOKEN: ${{ vars.TWILIO_AUTH_TOKEN }}
+      TWILIO_SID: ${{ vars.TWILIO_SID }}
+      TWILIO_VERIFIED_NUMBER: ${{ vars.TWILIO_VIRTUAL_NUMBER }}
+      TWILIO_VIRTUAL_NUMBER: ${{ vars.TWILIO_VIRTUAL_NUMBER }}
+      SHEETY_PRICES_ENDPOINT: ${{ vars.SHEETY_PRICES_ENDPOINT }}
+      API_KEY: ${{ vars.API_KEY }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.10"
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run python
+        run: python3 main.py
