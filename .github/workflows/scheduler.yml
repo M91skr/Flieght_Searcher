@@ -2,7 +2,7 @@ name: Run scheduled action
 on:
   schedule:
     # You need to set your schedule here
-    - cron: "45 15 * * *"
+    - cron: "15 16 * * *"
 
 jobs:
   create_issue:
@@ -13,6 +13,8 @@ jobs:
       TWILIO_SID: ${{ vars.TWILIO_SID }}
       TWILIO_VERIFIED_NUMBER: ${{ vars.TWILIO_VIRTUAL_NUMBER }}
       TWILIO_VIRTUAL_NUMBER: ${{ vars.TWILIO_VIRTUAL_NUMBER }}
+      SHEETY_PRICES_ENDPOINT: ${{ vars.SHEETY_PRICES_ENDPOINT }}
+      API_KEY: ${{ vars.API_KEY }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
