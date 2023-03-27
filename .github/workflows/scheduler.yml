@@ -9,10 +9,10 @@ jobs:
     name: Send Birthday wish
     runs-on: ubuntu-latest
     env:
-      TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
-      TWILIO_SID: ${{ secrets.TWILIO_SID }}
-      TWILIO_VERIFIED_NUMBER: ${{ TWILIO_VIRTUAL_NUMBER }}
-      TWILIO_VIRTUAL_NUMBER: ${{ TWILIO_VIRTUAL_NUMBER }}
+      TWILIO_AUTH_TOKEN: ${{ vars.TWILIO_AUTH_TOKEN }}
+      TWILIO_SID: ${{ vars.TWILIO_SID }}
+      TWILIO_VERIFIED_NUMBER: ${{ vars.TWILIO_VIRTUAL_NUMBER }}
+      TWILIO_VIRTUAL_NUMBER: ${{ vars.TWILIO_VIRTUAL_NUMBER }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
