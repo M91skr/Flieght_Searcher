@@ -1,4 +1,4 @@
-name: Run scheduled action
+name: Run scheduled action every 5 minutes
 on:
   schedule:
     # You need to set your schedule here
