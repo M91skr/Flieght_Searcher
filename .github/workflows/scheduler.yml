@@ -6,7 +6,7 @@ on:
 
 jobs:
   create_issue:
-    name: Send Birthday wish
+    name: Flieght_Searcher
     runs-on: ubuntu-latest
     env:
       TWILIO_AUTH_TOKEN: ${{ vars.TWILIO_AUTH_TOKEN }}
