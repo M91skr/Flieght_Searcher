@@ -29,6 +29,7 @@ from flight_search import FlightSearch
 ORIGIN_CITY_IATA = "BER"
 email_from = "MY_EMAIL"
 my_password = "MY_PASSWORD"
+email_to = "RESIEVER"
 
 # ---------------------------------------- Classes Calling ----------------------------------------
 
@@ -58,12 +59,12 @@ for destination in sheet_data:
 
     # ---------------------------------------- Filtering available flight prices --------------------------------------
 
-    email_to = input("Enter your email\n")
+    
     if flight and flight["price"] < destination["maxPrice(euro)"]:
         context = ssl.create_default_context()
         message = f"Low price alert! to fly from {flight['cityFrom']} to {flight['cityTo']}\nlink: {flight['deep_link']}"
         with SMTP("smtp.gmail.com") as connection:
             connection.starttls(context=context)
             connection.login(user=os.getenv(email_from), password=os.getenv(my_password))
-            connection.sendmail(from_addr=os.getenv(email_from), to_addrs=email_to, msg=f"Subject: Travel time\n\n{message}")
+            connection.sendmail(from_addr=os.getenv(email_from), to_addrs=os.getenv(email_to), msg=f"Subject: Travel time\n\n{message}")
         print("Done")
