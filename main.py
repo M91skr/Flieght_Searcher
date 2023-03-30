@@ -19,19 +19,16 @@ You can run this code in the cloud, defined for that daily task, and enjoy your 
 
 import os
 from datetime import datetime, timedelta
-
-from twilio.rest import Client
-
+from smtplib import SMTP
+import ssl
 from data_manager import DataManager
 from flight_search import FlightSearch
 
 # ---------------------------------------- Add Parameters ----------------------------------------
 
 ORIGIN_CITY_IATA = "BER"
-sid = "TWILIO_SID"
-auth_token = "TWILIO_AUTH_TOKEN"
-virtual_number = "TWILIO_VIRTUAL_NUMBER"
-verified_number = "TWILIO_VERIFIED_NUMBER"
+email_from = "MY_EMAIL"
+my_password = "MY_PASSWORD"
 
 # ---------------------------------------- Classes Calling ----------------------------------------
 
@@ -61,12 +58,12 @@ for destination in sheet_data:
 
     # ---------------------------------------- Filtering available flight prices --------------------------------------
 
+    email_to = input("Enter your email\n")
     if flight and flight["price"] < destination["maxPrice(euro)"]:
-        client = Client(os.getenv(sid), os.getenv(auth_token))
-        message = client.messages.create(
-            body=f"Low price alert! Only £{flight['price']} to fly from {flight['cityFrom']} to {flight['cityTo']} by "
-                 f"airline {flight['airlines']} from {flight['local_departure']} and link {flight['deep_link']}",
-            from_=os.getenv(virtual_number),
-            to=os.getenv(verified_number)
-        )
-        print(message.status)
+        context = ssl.create_default_context()
+        message = f"Low price alert! to fly from {flight['cityFrom']} to {flight['cityTo']}\nlink: {flight['deep_link']}"
+        with SMTP("smtp.gmail.com") as connection:
+            connection.starttls(context=context)
+            connection.login(user=os.getenv(email_from), password=os.getenv(my_password))
+            connection.sendmail(from_addr=os.getenv(email_from), to_addrs=email_to, msg=f"Subject: Travel time\n\n{message}")
+        print("Done")
