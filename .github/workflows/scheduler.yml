@@ -9,10 +9,9 @@ jobs:
     name: Flieght_Searcher
     runs-on: ubuntu-latest
     env:
-      TWILIO_AUTH_TOKEN: ${{ vars.TWILIO_AUTH_TOKEN }}
-      TWILIO_SID: ${{ vars.TWILIO_SID }}
-      TWILIO_VERIFIED_NUMBER: ${{ vars.TWILIO_VIRTUAL_NUMBER }}
-      TWILIO_VIRTUAL_NUMBER: ${{ vars.TWILIO_VIRTUAL_NUMBER }}
+      MY_EMAIL: ${{ vars.MY_EMAIL }}
+      MY_PASSWORD: ${{ vars.MY_PASSWORD }}
+      RESIEVER: ${{ vars.RESIEVER }}
       SHEETY_PRICES_ENDPOINT: ${{ vars.SHEETY_PRICES_ENDPOINT }}
       API_KEY: ${{ vars.API_KEY }}
     steps:
